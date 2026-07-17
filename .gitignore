@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Cairn local state
+.cairn/
+audit.jsonl
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Generated SBOM
+sbom.cyclonedx.json
+sbom/

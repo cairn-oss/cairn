@@ -1,0 +1,29 @@
+# Code Owners — every path is owned by the maintainers team, so every pull
+# request requires a maintainer's review before it can be merged (enforced
+# by branch protection's "require review from Code Owners"). Contributors
+# propose; maintainers approve and merge. See GOVERNANCE.md.
+
+# Default: the whole repository.
+*                           @cairn-oss/maintainers
+
+# Security-sensitive surfaces — kept explicit so a change here can never
+# ride in on a generic approval. Same team today; split to a dedicated
+# security-maintainers team if the maintainer group grows.
+/src/cairn/terraform.py  @cairn-oss/maintainers
+/src/cairn/kubernetes.py @cairn-oss/maintainers
+/src/cairn/policy.py     @cairn-oss/maintainers
+/src/cairn/llm.py        @cairn-oss/maintainers
+/src/cairn/audit.py      @cairn-oss/maintainers
+/src/cairn/editions.py   @cairn-oss/maintainers
+
+# Anything that touches how code is built, reviewed, or released.
+/.github/                   @cairn-oss/maintainers
+/pyproject.toml             @cairn-oss/maintainers
+/Dockerfile                 @cairn-oss/maintainers
+/action.yml                 @cairn-oss/maintainers
+
+# The rules of the project themselves.
+/GOVERNANCE.md              @cairn-oss/maintainers
+/MAINTAINERS.md             @cairn-oss/maintainers
+/SECURITY.md                @cairn-oss/maintainers
+/docs/merge-and-security-policy.md @cairn-oss/maintainers

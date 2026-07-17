@@ -1,0 +1,39 @@
+name: Bug report
+description: Something is broken or behaving unexpectedly
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Cairn version
+      description: Output of `cairn version`
+      placeholder: cairn 0.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: >
+        The smallest Terraform snippet + command that reproduces the issue.
+        Please redact anything sensitive — never paste real credentials.
+      placeholder: |
+        ```hcl
+        resource "aws_instance" "x" { ... }
+        ```
+        ```bash
+        cairn scan ./repro
+        ```
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual behavior
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: "Python 3.12, Ubuntu 24.04, pip install"

@@ -1,0 +1,65 @@
+{
+  "name": "org-push-protection",
+  "target": "push",
+  "enforcement": "active",
+  "conditions": {
+    "repository_name": {
+      "include": ["~ALL"],
+      "exclude": [],
+      "protected": false
+    }
+  },
+  "rules": [
+    {
+      "type": "file_extension_restriction",
+      "parameters": {
+        "restricted_file_extensions": [
+          "key",
+          "pem",
+          "p12",
+          "pfx",
+          "keystore",
+          "jks",
+          "ppk"
+        ]
+      }
+    },
+    {
+      "type": "file_path_restriction",
+      "parameters": {
+        "restricted_file_paths": [
+          "secrets/**",
+          "**/secrets/**",
+          "**/signing.key",
+          "**/*.key",
+          "**/.env",
+          "**/.env.*",
+          "**/id_rsa",
+          "**/id_ed25519",
+          "**/*.tfstate",
+          "**/*.tfstate.*",
+          "**/terraform.tfvars"
+        ]
+      }
+    },
+    {
+      "type": "max_file_size",
+      "parameters": {
+        "max_file_size": 25
+      }
+    },
+    {
+      "type": "max_file_path_length",
+      "parameters": {
+        "max_file_path_length": 255
+      }
+    }
+  ],
+  "bypass_actors": [
+    {
+      "actor_type": "OrganizationAdmin",
+      "actor_id": 1,
+      "bypass_mode": "always"
+    }
+  ]
+}

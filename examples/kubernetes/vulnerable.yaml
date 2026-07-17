@@ -1,0 +1,29 @@
+# Deliberately problematic manifests used in Cairn's demo and tests.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments
+spec:
+  replicas: 2
+  template:
+    spec:
+      volumes:
+        - name: docker-sock          # K8S003: hostPath
+          hostPath:
+            path: /var/run/docker.sock
+      containers:
+        - name: app
+          image: acme/payments:latest # K8S004: unpinned
+          securityContext:
+            privileged: true          # K8S001 (and K8S002: no runAsNonRoot)
+          # K8S005: no resources.limits · K8S006: no probes
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments
+spec:
+  selector:
+    app: payments
+  ports:
+    - port: 80

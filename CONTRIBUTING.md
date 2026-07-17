@@ -8,9 +8,20 @@ typed and tested, and a first PR can genuinely land in an afternoon.
 Everyone is welcome to contribute; **a maintainer makes the final merge
 after reviewing your pull request.** You work from a fork (you won't have
 push access to this repository), open a PR, CI runs, a maintainer reviews
-against the checklist below, and a maintainer merges. Releases to
-production (PyPI, the container image, the Action) are cut only by
-maintainers. The full model is in [GOVERNANCE.md](GOVERNANCE.md) and
+against the checklist below, and a maintainer merges.
+
+**Merge policy — stated plainly, and enforced by GitHub, not by trust:**
+
+- **Only maintainers can merge to `main`.** The `main` branch accepts no
+  direct pushes; every change goes through a reviewed pull request, and only
+  members of the [`@cairn-oss/maintainers`](MAINTAINERS.md) team have merge
+  rights. This is enforced by a branch-protection ruleset, not by convention.
+- **Contributors never need write access to this repository.** You fork, push
+  to your own fork, and open a PR — that is the entire contributor path.
+- **Releases to production** (PyPI, the container image, the GitHub Action)
+  are cut only by maintainers, from signed tags.
+
+The full model is in [GOVERNANCE.md](GOVERNANCE.md) and
 [docs/merge-and-security-policy.md](docs/merge-and-security-policy.md).
 
 ```bash

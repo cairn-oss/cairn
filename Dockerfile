@@ -4,13 +4,13 @@
 #
 # Multi-stage: build wheels once, ship a slim non-root runtime.
 
-FROM python:3.12-slim AS build
+FROM python:3.14-slim AS build
 WORKDIR /build
 COPY pyproject.toml README.md ./
 COPY src ./src
 RUN pip install --no-cache-dir build && python -m build --wheel
 
-FROM python:3.12-slim
+FROM python:3.14-slim
 LABEL org.opencontainers.image.title="Cairn" \
       org.opencontainers.image.description="Local-first IaC auditor fusing cost + security, with fixes." \
       org.opencontainers.image.source="https://github.com/cairn-oss/cairn" \

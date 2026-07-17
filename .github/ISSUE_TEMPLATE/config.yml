@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/cairn-oss/cairn/security/advisories/new
+    about: Please report security issues privately, never as a public issue.
+  - name: Question / discussion
+    url: https://github.com/cairn-oss/cairn/discussions
+    about: Usage questions and ideas live in Discussions.

@@ -1,0 +1,142 @@
+warning: in the working copy of '.github/workflows/ci.yml', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '.github/workflows/codeql.yml', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '.github/workflows/release.yml', CRLF will be replaced by LF the next time Git touches it
+[1mdiff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml[m
+[1mindex fa16c7d..51ee11c 100755[m
+[1m--- a/.github/workflows/ci.yml[m
+[1m+++ b/.github/workflows/ci.yml[m
+[36m@@ -16,10 +16,10 @@[m [mjobs:[m
+   lint:[m
+     runs-on: ubuntu-latest[m
+     steps:[m
+[31m-      - uses: actions/checkout@v7[m
+[32m+[m[32m      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7[m
+         with:[m
+           persist-credentials: false[m
+[31m-      - uses: actions/setup-python@v6[m
+[32m+[m[32m      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6[m
+         with:[m
+           python-version: "3.12"[m
+           cache: pip[m
+[36m@@ -42,10 +42,10 @@[m [mjobs:[m
+           - os: windows-latest[m
+             python-version: "3.10"[m
+     steps:[m
+[31m-      - uses: actions/checkout@v7[m
+[32m+[m[32m      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7[m
+         with:[m
+           persist-credentials: false[m
+[31m-      - uses: actions/setup-python@v6[m
+[32m+[m[32m      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6[m
+         with:[m
+           python-version: ${{ matrix.python-version }}[m
+           cache: pip[m
+[36m@@ -65,13 +65,14 @@[m [mjobs:[m
+   security:[m
+     runs-on: ubuntu-latest[m
+     steps:[m
+[31m-      - uses: actions/checkout@v7[m
+[32m+[m[32m      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7[m
+         with:[m
+           persist-credentials: false[m
+[31m-      - uses: actions/setup-python@v6[m
+[32m+[m[32m      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6[m
+         with:[m
+           python-version: "3.12"[m
+           cache: pip[m
+[32m+[m[32m      - run: python -m pip install -U pip setuptools   # audit deps, not stale runner tooling[m
+       - run: pip install -e . pip-audit[m
+       - name: Dependency audit[m
+         run: pip-audit[m
+[36m@@ -79,10 +80,10 @@[m [mjobs:[m
+   docs:[m
+     runs-on: ubuntu-latest[m
+     steps:[m
+[31m-      - uses: actions/checkout@v7[m
+[32m+[m[32m      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7[m
+         with:[m
+           persist-credentials: false[m
+[31m-      - uses: actions/setup-python@v6[m
+[32m+[m[32m      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6[m
+         with:[m
+           python-version: "3.12"[m
+       - run: pip install -e .[m
+[1mdiff --git a/.github/workflows/codeql.yml b/.github/workflows/codeql.yml[m
+[1mindex bfe2345..11af74e 100755[m
+[1m--- a/.github/workflows/codeql.yml[m
+[1m+++ b/.github/workflows/codeql.yml[m
+[36m@@ -17,10 +17,10 @@[m [mjobs:[m
+     permissions:[m
+       security-events: write[m
+     steps:[m
+[31m-      - uses: actions/checkout@v7[m
+[32m+[m[32m      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7[m
+         with:[m
+           persist-credentials: false[m
+[31m-      - uses: github/codeql-action/init@v4[m
+[32m+[m[32m      - uses: github/codeql-action/init@7188fc363630916deb702c7fdcf4e481b751f97a  # v4[m
+         with:[m
+           languages: python[m
+[31m-      - uses: github/codeql-action/analyze@v4[m
+[32m+[m[32m      - uses: github/codeql-action/analyze@7188fc363630916deb702c7fdcf4e481b751f97a  # v4[m
+[1mdiff --git a/.github/workflows/release.yml b/.github/workflows/release.yml[m
+[1mindex c72028a..c291ee8 100755[m
+[1m--- a/.github/workflows/release.yml[m
+[1m+++ b/.github/workflows/release.yml[m
+[36m@@ -11,10 +11,10 @@[m [mjobs:[m
+   build:[m
+     runs-on: ubuntu-latest[m
+     steps:[m
+[31m-      - uses: actions/checkout@v7[m
+[32m+[m[32m      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7[m
+         with:[m
+           persist-credentials: false[m
+[31m-      - uses: actions/setup-python@v6[m
+[32m+[m[32m      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6[m
+         with:[m
+           python-version: "3.12"[m
+       - run: pip install build[m
+[36m@@ -32,11 +32,11 @@[m [mjobs:[m
+           /tmp/relenv/bin/pip install --quiet dist/*.whl[m
+           mkdir -p sbom[m
+           cyclonedx-py environment /tmp/relenv/bin/python > "sbom/cairn-${GITHUB_REF_NAME}.cyclonedx.json"[m
+[31m-      - uses: actions/upload-artifact@v4[m
+[32m+[m[32m      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4[m
+         with:[m
+           name: dist[m
+           path: dist/[m
+[31m-      - uses: actions/upload-artifact@v4[m
+[32m+[m[32m      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4[m
+         with:[m
+           name: sbom[m
+           path: sbom/[m
+[36m@@ -50,24 +50,24 @@[m [mjobs:[m
+       contents: write[m
+       attestations: write[m
+     steps:[m
+[31m-      - uses: actions/download-artifact@v4[m
+[32m+[m[32m      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093  # v4[m
+         with:[m
+           name: dist[m
+           path: dist/[m
+[31m-      - uses: actions/download-artifact@v4[m
+[32m+[m[32m      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093  # v4[m
+         with:[m
+           name: sbom[m
+           path: sbom/[m
+       - name: Attest build provenance[m
+[31m-        uses: actions/attest-build-provenance@v4[m
+[32m+[m[32m        uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373  # v4[m
+         with:[m
+           subject-path: dist/*[m
+       - name: Publish to PyPI[m
+[31m-        uses: pypa/gh-action-pypi-publish@release/v1[m
+[32m+[m[32m        uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b  # release/v1[m
+         with:[m
+           skip-existing: true[m
+       - name: GitHub release[m
+[31m-        uses: softprops/action-gh-release@v3[m
+[32m+[m[32m        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228  # v3[m
+         with:[m
+           files: |[m
+             dist/*[m

@@ -1,0 +1,50 @@
+name: Rule proposal
+description: Propose a new detection rule
+labels: [rule, enhancement]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options: [SECURITY, COST, RELIABILITY, GOVERNANCE]
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: What should the rule detect?
+      placeholder: "RDS instances without deletion protection"
+    validations:
+      required: true
+  - type: textarea
+    id: bad
+    attributes:
+      label: Example of failing HCL
+      render: hcl
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: The fix Cairn should propose
+      description: Fix-not-flag is a project principle — what is the concrete remediation?
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Suggested severity
+      options: [CRITICAL, HIGH, MEDIUM, LOW, INFO]
+    validations:
+      required: true
+  - type: textarea
+    id: refs
+    attributes:
+      label: References
+      description: Vendor docs, CIS benchmark section, pricing page, etc.
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd like to implement this myself (see CONTRIBUTING.md — it's one function)

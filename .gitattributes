@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.ico binary
+# Keep generated/reference docs out of language stats
+docs/** linguist-documentation
+examples/** linguist-documentation

@@ -1,0 +1,46 @@
+name: "Cairn IaC Audit"
+description: >
+  Local-first Terraform audit: cost + security in one pass, with fixes.
+  Produces a SARIF file and fails the job on findings above your threshold.
+author: "Cairn Maintainers"
+branding:
+  icon: shield
+  color: purple
+
+inputs:
+  path:
+    description: "File or directory to scan"
+    required: false
+    default: "."
+  fail-on:
+    description: "Fail the job on findings at/above this severity (CRITICAL|HIGH|MEDIUM|LOW|INFO|NEVER)"
+    required: false
+    default: "HIGH"
+  config:
+    description: "Path to a .cairn.yaml policy file"
+    required: false
+    default: ""
+  sarif-file:
+    description: "Where to write the SARIF report"
+    required: false
+    default: "cairn.sarif"
+
+outputs:
+  sarif-file:
+    description: "Path of the generated SARIF report"
+    value: ${{ inputs.sarif-file }}
+
+runs:
+  using: composite
+  steps:
+    - name: Install Cairn
+      shell: bash
+      run: pip install --quiet "cairn-iac>=0.6,<1"
+    - name: Scan
+      shell: bash
+      run: |
+        ARGS=(scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}")
+        if [ -n "${{ inputs.config }}" ]; then ARGS+=(--config "${{ inputs.config }}"); fi
+        # SARIF for code scanning (never fails), then the gating run.
+        cairn "${ARGS[@]}" --fail-on NEVER --format sarif --output "${{ inputs.sarif-file }}"
+        cairn "${ARGS[@]}"

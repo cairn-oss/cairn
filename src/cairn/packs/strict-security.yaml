@@ -1,0 +1,11 @@
+# Bundled pack: a stricter security posture for regulated or
+# internet-facing estates. Extend it, then override what you must:
+#
+#   extends: [strict-security]
+#   fail_on: HIGH        # your line wins over the pack's
+min_severity: LOW
+fail_on: MEDIUM
+severity_overrides:
+  SEC009: HIGH      # IMDSv1 is a live credential-theft path
+  SEC010: CRITICAL  # plaintext listeners carry credentials in the open
+  REL001: HIGH      # no backups is a security incident amplifier

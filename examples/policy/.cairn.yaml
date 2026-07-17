@@ -1,0 +1,30 @@
+# Example org policy for Cairn — see docs/configuration.md for the
+# full reference. Everything here is optional.
+
+# Report floor and CI gate.
+min_severity: LOW
+fail_on: HIGH
+
+# Organization-mandated tags (activates GOV002).
+required_tags: [Owner, CostCenter]
+
+# We handle generic tag nagging elsewhere; keep the org-policy rule only.
+disabled_rules: [GOV001]
+
+# gp2 volumes matter more to us than the default LOW.
+severity_overrides:
+  COST002: MEDIUM
+
+# Documented, targeted exceptions — globs allowed, reasons required by
+# convention (and by your reviewers).
+ignores:
+  - rule: SEC001
+    resource: aws_security_group.legacy_*
+    reason: grandfathered until the Q3 network migration
+
+# Opt-in LLM explanations. 'ollama' keeps everything on-machine.
+llm:
+  provider: none
+
+audit:
+  enabled: true

@@ -1,0 +1,10 @@
+# Bundled pack: for teams whose bill, not their perimeter, is on fire.
+# Raises cost findings to CI-blocking severity and sets a default budget
+# gate for `cairn diff`.
+severity_overrides:
+  COST001: HIGH
+  COST004: HIGH
+  COST002: MEDIUM
+  COST006: MEDIUM
+budget:
+  max_monthly_increase: 500

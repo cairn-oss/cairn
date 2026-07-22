@@ -187,7 +187,7 @@ scanned** (never a misleading "clean"). Coverage detail: [docs/coverage.md](docs
 
 ## Project status & roadmap
 
-Cairn is at **v0.5** — Terraform + Kubernetes scanning, `propose`
+Cairn is at **v0.6** — Terraform + Kubernetes scanning, `propose`
 (Trust Ladder rung 1), policy packs, pre-merge cost diffing, and the
 open-core boundary drawn in code. Shipped and designed releases are in
 [ROADMAP.md](ROADMAP.md). Architecture and decision records live

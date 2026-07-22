@@ -24,31 +24,33 @@
 Cairn scans your Terraform on **your machine**, applies security, cost, reliability and governance rules in one pass, reconciles the trade-offs between them, and proposes concrete, ready-to-apply fixes.
 
 ```text
-$ cairn scan ./infra
+$ cairn scan examples/vulnerable
 
-Cairn found 25 issue(s) in ./infra (6 cost, 6 governance, 3 reliability, 10 security):
+Cairn found 25 issue(s) in examples/vulnerable (6 cost, 6 governance, 3 reliability, 10 security):
 
 1. [CRITICAL/SECURITY] aws_security_group.web  (SEC001)
-   at:      infra/main.tf:3
+   at:      examples/vulnerable/main.tf:4
    problem: Ingress on port 22 is open to the entire internet (0.0.0.0/0) and covers SSH/RDP.
-   fix:     Restrict cidr_blocks to known ranges, or front the service with a
-            load balancer or SSM Session Manager instead of exposing it directly.
+   fix:     Restrict cidr_blocks to known ranges (office/VPN CIDRs), or front the service with a load balancer or SSM Session Manager instead of exposing it directly.
    patch:
      cidr_blocks = ["10.0.0.0/8"]  # replace with your trusted CIDR
 
-9. [MEDIUM/COST] aws_instance.batch  (COST001)
+   ...   (23 findings elided; each carries its own patch)
+
+10. [MEDIUM/COST] aws_instance.batch  (COST001)
+   at:      examples/vulnerable/main.tf:28
    problem: Instance type 'm5.4xlarge' is very large (~$561/month on-demand) and likely over-provisioned.
+   fix:     Verify utilization (CloudWatch CPU/memory over 2+ weeks); a smaller type such as m5.xlarge often carries the load at a fraction of the cost. If sustained load is real, consider a savings plan instead of on-demand.
    saves:   ~$420.48/month (estimate)
    patch:
      instance_type = "m5.xlarge"
 
 Trade-offs (cost x risk on the same resource):
-  ⚖ aws_db_instance.main [COST + SECURITY]
-    Sequence the security fix first, then right-size — resizing an exposed
-    resource first just makes the breach cheaper to run.
+  ⚖ aws_db_instance.main [COST + GOVERNANCE + RELIABILITY + SECURITY]
+    Cost and security findings touch this resource. Sequence the security fix first, then right-size — resizing an exposed resource first just makes the breach cheaper to run.
 
 Estimated recoverable spend: ~$1,717.53/month
-9 resource(s), 1 file(s), 0.12s. Local-only scan; nothing left this machine.
+9 resource(s), 1 file(s), 0.71s. Local-only scan; nothing left this machine.
 ```
 
 ## Why Cairn
